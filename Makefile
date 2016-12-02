@@ -6,13 +6,15 @@
 #    By: jcarra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/21 10:14:19 by jcarra            #+#    #+#              #
-#    Updated: 2016/12/01 16:08:28 by jcarra           ###   ########.fr        #
+#    Updated: 2016/12/02 14:18:46 by jcarra           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME		=	ft_select
 
-SRC			=	ft_display.c \
+SRC			=	ft_input.c \
+				ft_free_list.c \
+				ft_display.c \
 				ft_init.c \
 				ft_select_tools.c \
 				ft_select.c \

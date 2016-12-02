@@ -6,20 +6,16 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 09:33:31 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/01 16:02:02 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/02 14:34:28 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SELECT_H
 # define SELECT_H
 
-# define UP 1
-# define DOWN 2
-# define RIGHT 3
-# define LEFT 4
-# define SPACE 5
-# define ENTER 6
-# define DEL 7
+# define SPACE 1
+# define ENTER 2
+# define DEL 3
 
 # define TRUE 1
 # define FALSE 0
@@ -56,8 +52,10 @@ void				ft_add(t_list **begin, t_list *new);
 void				ft_deldata(void *data);
 void				ft_remove(t_list **list, void (*f)(void *data));
 void				ft_initlist(t_list **list, char **t, size_t len);
-void				ft_display(t_win *win, t_list *list);
+void				ft_display(t_win *win, t_list *list, int it);
 void				ft_select(t_list *list);
+void				ft_free_list(t_list *list);
+void				ft_get_input(int *it, int *exit, t_win *win, size_t len);
 int					ft_goto(char *cmd, int col, int line);
 int					ft_termcaps_end(void);
 int					ft_termcaps_init(void);
@@ -67,6 +65,7 @@ t_data				*ft_newd(char *name);
 t_list				*ft_new(void *data);
 
 #endif
+
 
 
 

@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_main.c                                          :+:      :+:    :+:   */
+/*   ft_free_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/01 09:14:04 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/02 10:42:26 by jcarra           ###   ########.fr       */
+/*   Created: 2016/12/02 09:28:00 by jcarra            #+#    #+#             */
+/*   Updated: 2016/12/02 09:42:33 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "select.h"
 
-int			main(int ac, char **av)
+void		ft_free_list(t_list *list)
 {
-	t_list	*list;
+	t_list	*tmp;
 
-	if (ac > 1)
+	if (!list)
+		return ;
+	while (list->next)
 	{
-		ft_initlist(&list, ++av, ac - 1);
-		if (!list)
-			return (1);
-		ft_select(list);
-//		ft_free_list(list);
+		tmp = list->next;
+		printf("%s\n", ((t_data *)(list->next->data))->name);
+		ft_remove(&list->next, &ft_deldata);
 	}
-	return (0);
+	if (list)
+		ft_remove(&list, &ft_deldata);
 }

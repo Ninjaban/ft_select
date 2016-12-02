@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 13:52:22 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/01 16:14:45 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/02 16:06:58 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static void		ft_init_size(t_win **win)
 	struct winsize	window;
 
 	ioctl(0, TIOCGWINSZ, &window);
-	if (*win)
+	if (*win && ((*win)->col == window.ws_col && (*win)->row == window.ws_row))
+		return ;
+	if (*win && ((*win)->col != window.ws_col || (*win)->row != window.ws_row))
 		free(win);
 	if ((*win = malloc(sizeof(t_win))) == NULL)
 		return ;
@@ -47,6 +49,27 @@ static int	ft_init_col(t_win **win, t_list *list)
 	return (TRUE);
 }
 
+static void	ft_algo(t_list *list, t_win *win)
+{
+	size_t	n;
+	int		it;
+	int		exit;
+
+	n = 0;
+	exit = FALSE;
+	it = 0;
+	ft_display(win, list, it);
+	while (exit == FALSE)
+	{
+		ft_init_size(&win);
+		while (ft_init_col(&win, list) == FALSE)
+			ft_init_size(&win);
+		ft_get_input(&it, &exit, win, ft_listlen(list));
+		if (exit == FALSE)
+			ft_display(win, list, it);
+	}
+}
+
 void		ft_select(t_list *list)
 {
 	t_win	*win;
@@ -55,9 +78,8 @@ void		ft_select(t_list *list)
 		return ;
 	win = NULL;
 	ft_init_size(&win);
-	if (ft_init_col(&win, list) == FALSE)
-		return ;
-	ft_display(win, list);
+	ft_init_col(&win, list);
+	ft_algo(list, win);
 	free(win);
 	ft_termcaps_end();
 }

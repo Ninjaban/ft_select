@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 14:24:26 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/01 16:27:00 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/02 09:11:36 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int			ft_termcaps_end(void)
 {
 	struct termios	term;
 
+	ft_goto("clear", 1, 1);
 	if (tcgetattr(0, &term) == -1)
 		return (FALSE);
 	term.c_lflag = (ICANON | ECHO);
