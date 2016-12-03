@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 13:52:22 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/02 16:06:58 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/03 10:35:14 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	ft_algo(t_list *list, t_win *win)
 		ft_init_size(&win);
 		while (ft_init_col(&win, list) == FALSE)
 			ft_init_size(&win);
-		ft_get_input(&it, &exit, win, ft_listlen(list));
+		ft_get_input(&it, &exit, win, &list);
 		if (exit == FALSE)
 			ft_display(win, list, it);
 	}
