@@ -6,10 +6,11 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 14:03:06 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/03 12:54:56 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/05 14:33:40 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "select.h"
 
 static int	ft_check_value(char buf[3], int a, int b, int c)
@@ -43,8 +44,9 @@ void		ft_get_input(int *it, int *exit, t_win *win, t_list **list)
 		ft_set_it(&(*it), -1, ft_listlen(*list));
 	if (ft_check_value(buf, 27, 91, 70) == TRUE)
 		(*exit) = TRUE;
-	if (ft_check_value(buf, 32, 0, 0) == TRUE)
+	if (ft_check_value(buf, 32, -1, -1) == TRUE)
 	{
+		ft_putendl("                                             lol");
 		((t_data *)((*list)->data))->b =
 			(((t_data *)((*list)->data))->b == TRUE) ? FALSE : TRUE;
 		ft_set_it(&(*it), 1, ft_listlen(*list));
@@ -53,5 +55,5 @@ void		ft_get_input(int *it, int *exit, t_win *win, t_list **list)
 		*exit = EXIT_EN;
 	if ((ft_check_value(buf, 127, -1, -1) == TRUE) ||
 		(ft_check_value(buf, 127, 91, 51) == TRUE))
-		ft_remove(&ft_findit(list, *it), &ft_deldata);
+		ft_remove(&(*list), *it, &ft_deldata);
 }

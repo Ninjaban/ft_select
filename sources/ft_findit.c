@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_add.c                                           :+:      :+:    :+:   */
+/*   ft_findit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/01 11:36:02 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/05 12:07:27 by jcarra           ###   ########.fr       */
+/*   Created: 2016/12/05 09:00:27 by jcarra            #+#    #+#             */
+/*   Updated: 2016/12/05 09:03:30 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "select.h"
 
-void		ft_add(t_list **begin, t_list *new)
+t_list		*ft_findit(t_list *list, int *it)
 {
-	if (!begin || !new)
-		return ;
-	new->next = (*begin);
-	if ((*begin))
+	t_list	*tmp;
+	int		n;
+
+	tmp = list;
+	n = 0;
+	if (!tmp)
+		return (NULL);
+	while (tmp && n < *it)
 	{
-		if ((*begin)->next)
-			ft_listlast(*begin)->next = new;
-		else
-			(*begin)->next = new;
+		tmp = tmp->next;
+		n = n + 1;
 	}
+	if (!tmp || n < *it)
+		return (NULL);
 	else
-		(*begin) = new;
+		return (tmp);
 }

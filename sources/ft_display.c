@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 14:55:54 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/02 14:31:21 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/05 14:32:36 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,25 +45,33 @@ void		ft_display(t_win *win, t_list *list, int it)
 	x = 0;
 	y = 0;
 	n = 0;
-	ft_goto("clear", 1, 1);
-	ft_goto("cm", x, y);
+//	ft_goto("clear", 1, 1);
+/*	ft_goto("cm", x, y);
 	if (n == (size_t)it)
 		ft_goto("us", x, y);
+	if (((t_data *)(list->data)->b) == TRUE)
+		ft_goto("mr", x, y);
 	ft_putstr_lim(((t_data *)(list->data))->name,
 					(win->sizecol >= 5) ? win->sizecol - 2 : win->sizecol);
 	if (n == (size_t)it)
 		ft_goto("ue", x, y);
-	while (tmp && tmp != list)
+	if (((t_data *)(list->data)->b) == TRUE)
+	ft_goto("me", x, y);*/
+	while (tmp && (tmp != list || n == 0))
 	{
-		x = (++n % win->nbcol == 0) ? 0 : x + win->sizecol;
-		y = (n % win->nbcol == 0) ? y + 1 : y;
 		ft_goto("cm", x, y);
 		if (n == (size_t)it)
 			ft_goto("us", x, y);
+		if (((t_data *)(tmp->data))->b == TRUE)
+			ft_goto("mr", x, y);
 		ft_putstr_lim(((t_data *)(tmp->data))->name,
 						(win->sizecol >= 5) ? win->sizecol - 2 : win->sizecol);
 		if (n == (size_t)it)
 			ft_goto("ue", x, y);
+		if (((t_data *)(tmp->data))->b == TRUE)
+			ft_goto("me", x, y);
+		x = (++n % win->nbcol == 0) ? 0 : x + win->sizecol;
+		y = (n % win->nbcol == 0) ? y + 1 : y;
 		tmp = tmp->next;
 	}
 }

@@ -6,16 +6,16 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 09:33:31 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/03 10:41:49 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/05 12:45:51 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SELECT_H
 # define SELECT_H
 
-# define SPACE 1
-# define ENTER 2
-# define DEL 3
+# define EXIT_NO 0
+# define EXIT_EC 1
+# define EXIT_EN 2
 
 # define TRUE 1
 # define FALSE 0
@@ -36,7 +36,6 @@ typedef struct		s_data
 typedef struct		s_list
 {
 	void			*data;
-	struct s_list	*prev;
 	struct s_list	*next;
 }					t_list;
 
@@ -50,7 +49,7 @@ typedef struct		s_win
 
 void				ft_add(t_list **begin, t_list *new);
 void				ft_deldata(void *data);
-void				ft_remove(t_list **list, void (*f)(void *data));
+void				ft_remove(t_list **list, int it, void (*f)(void *data));
 void				ft_initlist(t_list **list, char **t, size_t len);
 void				ft_display(t_win *win, t_list *list, int it);
 void				ft_select(t_list *list);
@@ -63,16 +62,7 @@ size_t				ft_get_maxsize(t_list *list);
 size_t				ft_listlen(t_list *list);
 t_data				*ft_newd(char *name);
 t_list				*ft_new(void *data);
+t_list				*ft_findit(t_list *list, int *it);
+t_list				*ft_listlast(t_list *begin);
 
 #endif
-
-
-
-
-
-
-
-
-
-
-

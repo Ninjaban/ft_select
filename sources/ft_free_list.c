@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 09:28:00 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/04 11:54:41 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/05 12:45:07 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ void		ft_free_list(t_list *list)
 
 	if (!list)
 		return ;
+	ft_listlast(list)->next = NULL;
 	while (list)
 	{
 		tmp = list->next;
-		printf("%s\n", ((t_data *)(list->next->data))->name);
-		ft_remove(&list, &ft_deldata);
+		free(list);
+		list = NULL;
 		list = tmp;
 	}
 }
