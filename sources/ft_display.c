@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 14:55:54 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/05 14:32:36 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/05 17:33:26 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,35 @@ static void	ft_putstr_lim(char *str, size_t lim)
 	}
 }
 
+static void	ft_checkit(t_list *list, char b, char *u, char *m)
+{
+	if (b == TRUE)
+		ft_goto(u, 1, 1);
+	if (((t_data *)(list->data))->b == TRUE)
+		ft_goto(m, 1, 1);
+}
+
+void		ft_print(t_list *list)
+{
+	t_list	*tmp;
+	size_t	n;
+
+	n = 0;
+	tmp = list;
+	while (tmp && (tmp != list || n == 0))
+	{
+		if (((t_data *)(tmp->data))->b == TRUE)
+		{
+			if (n == 2)
+				ft_putchar(' ');
+			ft_putstr(((t_data *)(tmp->data))->name);
+			n = 2;
+		}
+		tmp = tmp->next;
+		n = (n == 0) ? 1 : n;
+	}
+}
+
 void		ft_display(t_win *win, t_list *list, int it)
 {
 	t_list	*tmp;
@@ -41,35 +70,18 @@ void		ft_display(t_win *win, t_list *list, int it)
 
 	if (!list)
 		return ;
-	tmp = list->next;
+	tmp = list;
 	x = 0;
 	y = 0;
 	n = 0;
-//	ft_goto("clear", 1, 1);
-/*	ft_goto("cm", x, y);
-	if (n == (size_t)it)
-		ft_goto("us", x, y);
-	if (((t_data *)(list->data)->b) == TRUE)
-		ft_goto("mr", x, y);
-	ft_putstr_lim(((t_data *)(list->data))->name,
-					(win->sizecol >= 5) ? win->sizecol - 2 : win->sizecol);
-	if (n == (size_t)it)
-		ft_goto("ue", x, y);
-	if (((t_data *)(list->data)->b) == TRUE)
-	ft_goto("me", x, y);*/
+	ft_goto("clear", 1, 1);
 	while (tmp && (tmp != list || n == 0))
 	{
 		ft_goto("cm", x, y);
-		if (n == (size_t)it)
-			ft_goto("us", x, y);
-		if (((t_data *)(tmp->data))->b == TRUE)
-			ft_goto("mr", x, y);
+		ft_checkit(tmp, (n == (size_t)it) ? TRUE : FALSE, "us", "mr");
 		ft_putstr_lim(((t_data *)(tmp->data))->name,
 						(win->sizecol >= 5) ? win->sizecol - 2 : win->sizecol);
-		if (n == (size_t)it)
-			ft_goto("ue", x, y);
-		if (((t_data *)(tmp->data))->b == TRUE)
-			ft_goto("me", x, y);
+		ft_checkit(tmp, (n == (size_t)it) ? TRUE : FALSE, "ue", "me");
 		x = (++n % win->nbcol == 0) ? 0 : x + win->sizecol;
 		y = (n % win->nbcol == 0) ? y + 1 : y;
 		tmp = tmp->next;

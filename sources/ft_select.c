@@ -6,14 +6,14 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 13:52:22 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/03 10:35:14 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/05 17:38:23 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "select.h"
 
-static void		ft_init_size(t_win **win)
+static void	ft_init_size(t_win **win)
 {
 	struct winsize	window;
 
@@ -56,18 +56,23 @@ static void	ft_algo(t_list *list, t_win *win)
 	int		exit;
 
 	n = 0;
-	exit = FALSE;
+	exit = EXIT_NO;
 	it = 0;
 	ft_display(win, list, it);
-	while (exit == FALSE)
+	while (exit == EXIT_NO)
 	{
 		ft_init_size(&win);
 		while (ft_init_col(&win, list) == FALSE)
 			ft_init_size(&win);
 		ft_get_input(&it, &exit, win, &list);
-		if (exit == FALSE)
+		if (!ft_listlen(list))
+			exit = EXIT_EC;
+		if (exit == EXIT_NO)
 			ft_display(win, list, it);
 	}
+	ft_goto("clear", 1, 1);
+	if (exit == EXIT_EN)
+		ft_print(list);
 }
 
 void		ft_select(t_list *list)

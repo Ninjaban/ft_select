@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 14:03:06 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/05 14:33:40 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/05 17:38:58 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ void		ft_get_input(int *it, int *exit, t_win *win, t_list **list)
 		(*exit) = TRUE;
 	if (ft_check_value(buf, 32, -1, -1) == TRUE)
 	{
-		ft_putendl("                                             lol");
-		((t_data *)((*list)->data))->b =
-			(((t_data *)((*list)->data))->b == TRUE) ? FALSE : TRUE;
+		((t_data *)(ft_findit(*list, (*it))->data))->b =
+			(((t_data *)(ft_findit(*list, (*it))->data))->b == TRUE) ? FALSE : TRUE;
 		ft_set_it(&(*it), 1, ft_listlen(*list));
 	}
-	if (ft_check_value(buf, 10, 91, 68) == TRUE)
+	if (ft_check_value(buf, 10, -1, -1) == TRUE)
 		*exit = EXIT_EN;
 	if ((ft_check_value(buf, 127, -1, -1) == TRUE) ||
-		(ft_check_value(buf, 127, 91, 51) == TRUE))
+		(ft_check_value(buf, 27, 91, 51) == TRUE))
 		ft_remove(&(*list), *it, &ft_deldata);
+	ft_set_it(&(*it), 0, ft_listlen(*list));
 }

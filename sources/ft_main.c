@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 09:14:04 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/02 10:42:26 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/05 16:32:28 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			main(int ac, char **av)
 		if (!list)
 			return (1);
 		ft_select(list);
-//		ft_free_list(list);
+		ft_free_list(list);
 	}
 	return (0);
 }
