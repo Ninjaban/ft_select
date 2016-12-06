@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 09:33:31 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/06 11:37:13 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/06 14:08:58 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void				ft_select(t_list *list);
 void				ft_free_list(t_list *list);
 void				ft_get_input(int *it, int *exit, t_win *win, t_list **list);
 void				ft_print(t_list *list);
+void				ft_sig_check(int signo);
 int					ft_goto(char *cmd, int col, int line);
 int					ft_termcaps_end(void);
 int					ft_termcaps_init(void);

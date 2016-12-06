@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 14:03:06 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/06 11:35:59 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/06 14:05:07 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	ft_set_it(int *it, int set, int len)
 void		ft_get_input(int *it, int *exit, t_win *win, t_list **list)
 {
 	int		c;
-
 	read(0, &c, sizeof(int));
 	if (c == KEY_UPS)
 		ft_set_it(&(*it), ((int)win->nbcol) * -1, ft_listlen(*list));

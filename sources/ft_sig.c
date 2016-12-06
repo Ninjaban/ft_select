@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_main.c                                          :+:      :+:    :+:   */
+/*   ft_sig.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/01 09:14:04 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/06 14:07:35 by jcarra           ###   ########.fr       */
+/*   Created: 2016/12/06 13:53:17 by jcarra            #+#    #+#             */
+/*   Updated: 2016/12/06 14:16:52 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "select.h"
 
-int			main(int ac, char **av)
+void		ft_sig_check(int signo)
 {
-	t_list	*list;
-
-	if (ac > 1)
+	if (signo == SIGTSTP)
 	{
-		ft_initlist(&list, ++av, ac - 1);
-		if (!list)
-			return (1);
-		signal(SIGINT, ft_sig_check);
-		signal(SIGTSTP, ft_sig_check);
-		signal(SIGCONT, ft_sig_check);
-		ft_select(list);
-		ft_free_list(list);
+		ft_termcaps_end();
+		signal(SIGTSTP, SIG_DFL);
+		ioctl(0, TIOCSTI);
 	}
-	return (0);
+	if (signo == SIGCONT)
+	{
+		ft_termcaps_init();
+	}
+	if (signo == SIGKILL)
+		signal(SIGINT, SIG_IGN);
 }

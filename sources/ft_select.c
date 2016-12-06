@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 13:52:22 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/06 11:13:21 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/06 14:14:36 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ static void	ft_init_size(t_win **win)
 	ioctl(0, TIOCGWINSZ, &window);
 	if (*win && ((*win)->col == window.ws_col && (*win)->row == window.ws_row))
 		return ;
-	if (*win && ((*win)->col != window.ws_col || (*win)->row != window.ws_row))
-		free(win);
-	if ((*win = malloc(sizeof(t_win))) == NULL)
+	if (!(*win) && (*win = malloc(sizeof(t_win))) == NULL)
 		return ;
 	(*win)->col = window.ws_col;
 	(*win)->row = window.ws_row;
@@ -33,7 +31,7 @@ static int	ft_init_col(t_win **win, t_list *list)
 {
 	size_t	max;
 
-	if (!(*win))
+	if (!win || !(*win))
 		return (FALSE);
 	max = ft_get_maxsize(list);
 	(*win)->sizecol = ((*win)->col > max + 2) ? max + 2 : (*win)->col;
@@ -41,11 +39,8 @@ static int	ft_init_col(t_win **win, t_list *list)
 		(*win)->nbcol = (*win)->nbcol + 1;
 	while ((*win)->sizecol * (*win)->nbcol > (*win)->col)
 		(*win)->sizecol = (*win)->sizecol - 1;
-	if ((*win)->sizecol == 0)
-	{
-		free((*win));
+	if ((*win)->sizecol <= 6)
 		return (FALSE);
-	}
 	return (TRUE);
 }
 
@@ -65,6 +60,9 @@ static void	ft_algo(t_list *list, t_win *win)
 		while (ft_init_col(&win, list) == FALSE)
 			ft_init_size(&win);
 		ft_get_input(&it, &exit, win, &list);
+		ft_init_size(&win);
+		while (ft_init_col(&win, list) == FALSE)
+			ft_init_size(&win);
 		if (!ft_listlen(list))
 			exit = EXIT_EC;
 		if (exit == EXIT_NO)
@@ -83,7 +81,8 @@ void		ft_select(t_list *list)
 		return ;
 	win = NULL;
 	ft_init_size(&win);
-	ft_init_col(&win, list);
+	while (ft_init_col(&win, list) == FALSE)
+		ft_init_size(&win);
 	ft_goto("vi", 1, 1);
 	ft_algo(list, win);
 	ft_goto("ve", 1, 1);
