@@ -6,21 +6,11 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/02 14:03:06 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/05 17:38:58 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/06 11:35:59 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "select.h"
-
-static int	ft_check_value(char buf[3], int a, int b, int c)
-{
-	if ((buf[0] == a || a == -1) &&
-		(buf[1] == b || b == -1) &&
-		(buf[2] == c || c == -1))
-		return (TRUE);
-	return (FALSE);
-}
 
 static void	ft_set_it(int *it, int set, int len)
 {
@@ -31,29 +21,29 @@ static void	ft_set_it(int *it, int set, int len)
 
 void		ft_get_input(int *it, int *exit, t_win *win, t_list **list)
 {
-	char	buf[3];
+	int		c;
 
-	read(0, buf, 3);
-	if (ft_check_value(buf, 27, 91, 65) == TRUE)
+	read(0, &c, sizeof(int));
+	if (c == KEY_UPS)
 		ft_set_it(&(*it), ((int)win->nbcol) * -1, ft_listlen(*list));
-	if (ft_check_value(buf, 27, 91, 66) == TRUE)
+	if (c == KEY_DOW)
 		ft_set_it(&(*it), (int)win->nbcol, ft_listlen(*list));
-	if (ft_check_value(buf, 27, 91, 67) == TRUE)
+	if (c == KEY_RIG)
 		ft_set_it(&(*it), 1, ft_listlen(*list));
-	if (ft_check_value(buf, 27, 91, 68) == TRUE)
+	if (c == KEY_LEF)
 		ft_set_it(&(*it), -1, ft_listlen(*list));
-	if (ft_check_value(buf, 27, 91, 70) == TRUE)
-		(*exit) = TRUE;
-	if (ft_check_value(buf, 32, -1, -1) == TRUE)
+	if (c == KEY_ESC)
+		(*exit) = EXIT_EC;
+	if (c == KEY_SPA)
 	{
 		((t_data *)(ft_findit(*list, (*it))->data))->b =
-			(((t_data *)(ft_findit(*list, (*it))->data))->b == TRUE) ? FALSE : TRUE;
+			(((t_data *)(ft_findit(*list, (*it))->data))->b == TRUE)
+			? FALSE : TRUE;
 		ft_set_it(&(*it), 1, ft_listlen(*list));
 	}
-	if (ft_check_value(buf, 10, -1, -1) == TRUE)
+	if (c == KEY_RET)
 		*exit = EXIT_EN;
-	if ((ft_check_value(buf, 127, -1, -1) == TRUE) ||
-		(ft_check_value(buf, 27, 91, 51) == TRUE))
+	if (c == KEY_DEL || c == KEY_BAC)
 		ft_remove(&(*list), *it, &ft_deldata);
 	ft_set_it(&(*it), 0, ft_listlen(*list));
 }

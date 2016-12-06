@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 13:52:22 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/05 17:38:23 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/06 11:13:21 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ void		ft_select(t_list *list)
 	win = NULL;
 	ft_init_size(&win);
 	ft_init_col(&win, list);
+	ft_goto("vi", 1, 1);
 	ft_algo(list, win);
+	ft_goto("ve", 1, 1);
 	free(win);
 	ft_termcaps_end();
 }

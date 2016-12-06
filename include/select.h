@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 09:33:31 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/05 16:27:00 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/06 11:37:13 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@
 
 # define TRUE 1
 # define FALSE 0
+
+# define KEY_RET 10
+# define KEY_ESC 27
+# define KEY_SPA 32
+# define KEY_BAC 127
+# define KEY_DEL 2117294875
+
+# define KEY_UPS 4283163
+# define KEY_DOW 4348699
+# define KEY_RIG 4414235
+# define KEY_LEF 4479771
 
 # include <unistd.h>
 # include <stdlib.h>
