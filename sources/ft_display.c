@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 14:55:54 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/06 11:17:49 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/21 13:12:55 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ static void	ft_putstr_lim(char *str, size_t lim)
 
 	len = ft_strlen(str);
 	if (len <= lim)
-		ft_putstr(str);
+		ft_putstr_fd(str, 2);
 	if (len > lim)
 	{
 		if (lim < 4)
-			write(1, str, lim);
+			write(2, str, lim);
 		else
 		{
-			write(1, str, lim - 3);
-			ft_putstr("...");
+			write(2, str, lim - 3);
+			ft_putstr_fd("...", 2);
 		}
 	}
 }
