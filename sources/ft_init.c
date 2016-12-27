@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 14:24:26 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/21 13:14:23 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/27 14:42:32 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 **	ue		=	fin souligner.
 */
 
-int			fputchar(int c)
+int				fputchar(int c)
 {
 	write(2, &c, 1);
 	return (0);
 }
 
-int			ft_goto(char *cmd, int col, int line)
+int				ft_goto(char *cmd, int col, int line)
 {
 	char	*str;
 
@@ -38,19 +38,7 @@ int			ft_goto(char *cmd, int col, int line)
 	return (TRUE);
 }
 
-int			ft_termcaps_end(void)
-{
-	struct termios	term;
-
-	if (tcgetattr(0, &term) == -1)
-		return (FALSE);
-	term.c_lflag = (ICANON | ECHO);
-	if (tcsetattr(0, TCSANOW, &term) == -1)
-		return (FALSE);
-	return (TRUE);
-}
-
-int			ft_termcaps_init(void)
+int				ft_termcaps_init(void)
 {
 	struct termios	term;
 	const char		*name;

@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 09:14:04 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/06 14:07:35 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/27 14:41:21 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ int			main(int ac, char **av)
 		if (!list)
 			return (1);
 		signal(SIGINT, ft_sig_check);
-		signal(SIGTSTP, ft_sig_check);
-		signal(SIGCONT, ft_sig_check);
+		signal(SIGKILL, ft_sig_check);
+		signal(SIGQUIT, ft_sig_check);
+		signal(SIGTSTP, SIG_IGN);
+		signal(SIGCONT, SIG_IGN);
 		ft_select(list);
 		ft_free_list(list);
 	}

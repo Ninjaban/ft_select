@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 13:52:22 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/21 13:12:47 by jcarra           ###   ########.fr       */
+/*   Updated: 2016/12/27 14:19:30 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_init_col(t_win **win, t_list *list)
 		(*win)->nbcol = (*win)->nbcol + 1;
 	while ((*win)->sizecol * (*win)->nbcol > (*win)->col)
 		(*win)->sizecol = (*win)->sizecol - 1;
-	if ((*win)->sizecol <= 6)
+	if ((*win)->sizecol <= 6 && (max >= (*win)->sizecol))
 		return (FALSE);
 	return (TRUE);
 }
@@ -75,17 +75,19 @@ static void	ft_algo(t_list *list, t_win *win)
 
 void		ft_select(t_list *list)
 {
-	t_win	*win;
+	t_win			*win;
 
 	if (ft_termcaps_init() == FALSE)
 		return ;
 	win = NULL;
 	ft_init_size(&win);
+	ft_putnbr(ft_listlen(list));
 	while (ft_init_col(&win, list) == FALSE)
 		ft_init_size(&win);
 	ft_goto("vi", 1, 1);
 	ft_algo(list, win);
 	ft_goto("ve", 1, 1);
 	free(win);
-	ft_termcaps_end();
+	if (ft_termcaps_init() == FALSE)
+		return ;
 }
