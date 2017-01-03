@@ -103,7 +103,7 @@ void		ft_select(t_list *list)
 		return ;
 	g_win = NULL;
 	g_list = list;
-	ft_init_size(&g_win);
+	ft_init_size(&g_dwin);
 	while (ft_init_col(&g_win, g_list) == FALSE)
 		ft_init_size(&g_win);
 	ft_goto("vi", 1, 1);

@@ -6,14 +6,13 @@
 #    By: jcarra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/21 10:14:19 by jcarra            #+#    #+#              #
-#    Updated: 2016/12/06 14:05:55 by jcarra           ###   ########.fr        #
+#    Updated: 2017/01/03 13:27:46 by jcarra           ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 NAME		=	ft_select
 
-SRC			=	ft_sig.c \
-				ft_listlast.c \
+SRC			=	ft_listlast.c \
 				ft_findit.c \
 				ft_input.c \
 				ft_free_list.c \

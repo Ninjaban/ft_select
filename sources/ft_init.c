@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 14:24:26 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/27 14:42:32 by jcarra           ###   ########.fr       */
+/*   Updated: 2017/01/03 12:49:57 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,23 @@ int				ft_goto(char *cmd, int col, int line)
 	if ((str = tgoto(tgetstr(cmd, NULL), col, line)) == NULL)
 		return (FALSE);
 	tputs(str, 1, fputchar);
+	return (TRUE);
+}
+
+int				ft_termcaps_end(void)
+{
+	struct termios	term;
+	const char		*name;
+
+	if ((name = getenv("TERM")) == NULL)
+		return (FALSE);
+	if (tgetent(NULL, name) != 1)
+		return (FALSE);
+	if (tcgetattr(0, &term) == -1)
+		return (FALSE);
+	term.c_lflag = (ICANON | ECHO);
+	if (tcsetattr(0, TCSANOW, &term) == -1)
+		return (FALSE);
 	return (TRUE);
 }
 
