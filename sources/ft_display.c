@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 14:55:54 by jcarra            #+#    #+#             */
-/*   Updated: 2016/12/21 13:12:55 by jcarra           ###   ########.fr       */
+/*   Updated: 2017/01/03 18:51:49 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,18 @@ static void	ft_checkit(t_list *list, char b, char *u, char *m)
 		ft_goto(m, 1, 1);
 }
 
+static void	ft_color(t_data *data)
+{
+	if (data->type == 1)
+		ft_putstr_fd("\e[1m", 2);
+	if (data->type == 2)
+		ft_putstr_fd("\e[34m", 2);
+	if (data->type == 3)
+		ft_putstr_fd("\e[31m", 2);
+	if (data->type == 4)
+		ft_putstr_fd("\e[35m", 2);
+}
+
 void		ft_print(t_list *list)
 {
 	t_list	*tmp;
@@ -53,7 +65,7 @@ void		ft_print(t_list *list)
 		{
 			if (n == 2)
 				ft_putchar(' ');
-			ft_putstr(((t_data *)(tmp->data))->name);
+			ft_putstr(((t_data *)(tmp->data))->reel);
 			n = 2;
 		}
 		tmp = tmp->next;
@@ -78,10 +90,12 @@ void		ft_display(t_win *win, t_list *list, int it)
 	while (tmp && (tmp != list || n == 0))
 	{
 		ft_goto("cm", x, y);
+		ft_color((t_data *)(tmp->data));
 		ft_checkit(tmp, (n == (size_t)it) ? TRUE : FALSE, "us", "mr");
 		ft_putstr_lim(((t_data *)(tmp->data))->name,
 						(win->sizecol >= 5) ? win->sizecol - 2 : win->sizecol);
 		ft_checkit(tmp, (n == (size_t)it) ? TRUE : FALSE, "ue", "me");
+		ft_putstr_fd("\e[0m", 2);
 		x = (++n % win->nbcol == 0) ? 0 : x + win->sizecol;
 		y = (n % win->nbcol == 0) ? y + 1 : y;
 		tmp = tmp->next;

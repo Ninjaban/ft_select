@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 09:33:31 by jcarra            #+#    #+#             */
-/*   Updated: 2017/01/03 12:50:13 by jcarra           ###   ########.fr       */
+/*   Updated: 2017/01/03 18:51:34 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,14 @@
 # include <curses.h>
 # include <term.h>
 # include <sys/ioctl.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 
 typedef struct		s_data
 {
 	char			*name;
+	char			*reel;
+	char			type;
 	char			b;
 }					t_data;
 
@@ -68,6 +72,7 @@ void				ft_free_list(t_list *list);
 void				ft_get_input(int *it, int *exit, t_win *win, t_list **list);
 void				ft_print(t_list *list);
 void				ft_sig_check(int signo);
+int					ft_gettype(char *name);
 int					ft_goto(char *cmd, int col, int line);
 int					ft_termcaps_init(void);
 int					ft_termcaps_end(void);

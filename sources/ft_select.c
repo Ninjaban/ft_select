@@ -6,7 +6,7 @@
 /*   By: jcarra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/01 13:52:22 by jcarra            #+#    #+#             */
-/*   Updated: 2017/01/03 13:32:21 by jcarra           ###   ########.fr       */
+/*   Updated: 2017/01/03 18:58:18 by jcarra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,22 @@ static int	ft_init_col(t_win **win, t_list *list)
 
 void		ft_sig_check(int signo)
 {
-	if (signo == SIGKILL || signo == SIGINT || signo == SIGQUIT)
+	if (signo == SIGKILL || signo == SIGINT || signo == SIGQUIT ||
+		signo == SIGTSTP)
 	{
 		ft_goto("ve", 1, 1);
+		ft_goto("clear", 1, 1);
 		if (tcsetattr(0, TCSANOW, &g_term) == -1)
 			return ;
-		exit(1);
+		if (signo != SIGTSTP)
+			exit(1);
+		else
+			signal(SIGTSTP, SIG_DFL);
 	}
-	if (signo == SIGWINCH)
+	if (signo == SIGCONT)
+		if (ft_termcaps_init() == FALSE)
+			return ;
+	if (signo == SIGWINCH || signo == SIGCONT)
 	{
 		ft_goto("clear", 1, 1);
 		ft_init_size(&g_win);
