@@ -77,10 +77,8 @@ void		ft_sig_check(int signo)
 
 static void	ft_algo(void)
 {
-	size_t	n;
 	int		exit;
 
-	n = 0;
 	exit = EXIT_NO;
 	g_it = 0;
 	ft_display(g_win, g_list, g_it);
